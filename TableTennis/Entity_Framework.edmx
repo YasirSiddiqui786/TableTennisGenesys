@@ -1,0 +1,816 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GenesysProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="EmpName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsOrganiser" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="EmpPass" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OTP" Type="nvarchar" MaxLength="64" />
+          <Property Name="OTPGeneratedDateTime" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GenesysProject.dbo.HistoryRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="HistoryRecord">
+          <Key>
+            <PropertyRef Name="EmpID" />
+            <PropertyRef Name="EmpName" />
+            <PropertyRef Name="EmailID" />
+            <PropertyRef Name="IsOrganiser" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="UpdatedDate" />
+            <PropertyRef Name="SlotID" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="SlotAllocID" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="TableID" />
+            <PropertyRef Name="SlotCreatedDate" />
+          </Key>
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="EmpName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsOrganiser" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="SlotID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SlotAllocID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TableID" Type="int" Nullable="false" />
+          <Property Name="SlotCreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="SlotUpdatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SlotChart">
+          <Key>
+            <PropertyRef Name="SlotID" />
+          </Key>
+          <Property Name="SlotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SlotsAlloc">
+          <Key>
+            <PropertyRef Name="SlotAllocID" />
+          </Key>
+          <Property Name="SlotAllocID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="SlotID" Type="int" Nullable="false" />
+          <Property Name="TableID" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GenesysProject.dbo.SlotStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SlotStatus">
+          <Key>
+            <PropertyRef Name="TableID" />
+            <PropertyRef Name="SlotID" />
+          </Key>
+          <Property Name="TableID" Type="int" Nullable="false" />
+          <Property Name="SlotID" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" />
+        </EntityType>
+        <EntityType Name="TennisTable">
+          <Key>
+            <PropertyRef Name="TableID" />
+          </Key>
+          <Property Name="TableID" Type="int" Nullable="false" />
+          <Property Name="TableArena" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GenesysProject.dbo.vw_Employee' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Employee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+            <PropertyRef Name="EmpName" />
+          </Key>
+          <Property Name="EmpID" Type="bigint" Nullable="false" />
+          <Property Name="EmpName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsOrganiser" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GenesysProject.dbo.vw_Login' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_Login">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'GenesysProject.dbo.vw_TennisTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_TennisTable">
+          <Key>
+            <PropertyRef Name="TableID" />
+          </Key>
+          <Property Name="TableID" Type="int" Nullable="false" />
+          <Property Name="TableArena" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK_Employee_SlotsAlloc_EmailID">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SlotsAlloc" Type="Self.SlotsAlloc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmailID" />
+            </Principal>
+            <Dependent Role="SlotsAlloc">
+              <PropertyRef Name="EmailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlotChart_SlotsAlloc_SlotID">
+          <End Role="SlotChart" Type="Self.SlotChart" Multiplicity="1" />
+          <End Role="SlotsAlloc" Type="Self.SlotsAlloc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotChart">
+              <PropertyRef Name="SlotID" />
+            </Principal>
+            <Dependent Role="SlotsAlloc">
+              <PropertyRef Name="SlotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlotStatus_SlotChart_SlotID">
+          <End Role="SlotChart" Type="Self.SlotChart" Multiplicity="1" />
+          <End Role="SlotStatus" Type="Self.SlotStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotChart">
+              <PropertyRef Name="SlotID" />
+            </Principal>
+            <Dependent Role="SlotStatus">
+              <PropertyRef Name="SlotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlotStatus_TennisTable_TableID">
+          <End Role="TennisTable" Type="Self.TennisTable" Multiplicity="1" />
+          <End Role="SlotStatus" Type="Self.SlotStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TennisTable">
+              <PropertyRef Name="TableID" />
+            </Principal>
+            <Dependent Role="SlotStatus">
+              <PropertyRef Name="TableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableTennis_SlotsAlloc_TableID">
+          <End Role="TennisTable" Type="Self.TennisTable" Multiplicity="1" />
+          <End Role="SlotsAlloc" Type="Self.SlotsAlloc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TennisTable">
+              <PropertyRef Name="TableID" />
+            </Principal>
+            <Dependent Role="SlotsAlloc">
+              <PropertyRef Name="TableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_BookSlot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SlotID" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_CancelBookSlot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SlotID" Type="varchar" Mode="In" />
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_EmailValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetAllEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetAvailability" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Date" Type="date" Mode="In" />
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetBookedHistoryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetBooking" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GetEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailID" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="usp_LoginValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmpPass" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_RegEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpID" Type="int" Mode="In" />
+          <Parameter Name="EmpName" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmpPass" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsOrganiser" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usp_UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpID" Type="int" Mode="In" />
+          <Parameter Name="EmpName" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmpPass" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsOrganiser" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="usp_UpdateSlot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BookingSlotID" Type="nvarchar" Mode="In" />
+          <Parameter Name="CancellationSlotID" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="GenesysProjectModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlotChart" EntityType="Self.SlotChart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SlotsAlloc" EntityType="Self.SlotsAlloc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TennisTable" EntityType="Self.TennisTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryRecord" EntityType="Self.HistoryRecord" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HistoryRecord].[EmpID] AS [EmpID], 
+    [HistoryRecord].[EmpName] AS [EmpName], 
+    [HistoryRecord].[EmailID] AS [EmailID], 
+    [HistoryRecord].[IsOrganiser] AS [IsOrganiser], 
+    [HistoryRecord].[CreatedDate] AS [CreatedDate], 
+    [HistoryRecord].[UpdatedDate] AS [UpdatedDate], 
+    [HistoryRecord].[SlotID] AS [SlotID], 
+    [HistoryRecord].[Date] AS [Date], 
+    [HistoryRecord].[Time] AS [Time], 
+    [HistoryRecord].[SlotAllocID] AS [SlotAllocID], 
+    [HistoryRecord].[Status] AS [Status], 
+    [HistoryRecord].[TableID] AS [TableID], 
+    [HistoryRecord].[SlotCreatedDate] AS [SlotCreatedDate], 
+    [HistoryRecord].[SlotUpdatedDate] AS [SlotUpdatedDate]
+    FROM [dbo].[HistoryRecord] AS [HistoryRecord]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SlotStatus" EntityType="Self.SlotStatus" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SlotStatus].[TableID] AS [TableID], 
+    [SlotStatus].[SlotID] AS [SlotID], 
+    [SlotStatus].[Count] AS [Count]
+    FROM [dbo].[SlotStatus] AS [SlotStatus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Employee" EntityType="Self.vw_Employee" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Employee].[EmpID] AS [EmpID], 
+    [vw_Employee].[EmpName] AS [EmpName], 
+    [vw_Employee].[EmailID] AS [EmailID], 
+    [vw_Employee].[IsOrganiser] AS [IsOrganiser]
+    FROM [dbo].[vw_Employee] AS [vw_Employee]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_Login" EntityType="Self.vw_Login" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_Login].[Username] AS [Username], 
+    [vw_Login].[Password] AS [Password]
+    FROM [dbo].[vw_Login] AS [vw_Login]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_TennisTable" EntityType="Self.vw_TennisTable" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_TennisTable].[TableID] AS [TableID], 
+    [vw_TennisTable].[TableArena] AS [TableArena]
+    FROM [dbo].[vw_TennisTable] AS [vw_TennisTable]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Employee_SlotsAlloc_EmailID" Association="Self.FK_Employee_SlotsAlloc_EmailID">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="SlotsAlloc" EntitySet="SlotsAlloc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlotChart_SlotsAlloc_SlotID" Association="Self.FK_SlotChart_SlotsAlloc_SlotID">
+            <End Role="SlotChart" EntitySet="SlotChart" />
+            <End Role="SlotsAlloc" EntitySet="SlotsAlloc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlotStatus_SlotChart_SlotID" Association="Self.FK_SlotStatus_SlotChart_SlotID">
+            <End Role="SlotChart" EntitySet="SlotChart" />
+            <End Role="SlotStatus" EntitySet="SlotStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlotStatus_TennisTable_TableID" Association="Self.FK_SlotStatus_TennisTable_TableID">
+            <End Role="TennisTable" EntitySet="TennisTable" />
+            <End Role="SlotStatus" EntitySet="SlotStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableTennis_SlotsAlloc_TableID" Association="Self.FK_TableTennis_SlotsAlloc_TableID">
+            <End Role="TennisTable" EntitySet="TennisTable" />
+            <End Role="SlotsAlloc" EntitySet="SlotsAlloc" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GenesysProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsOrganiser" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="EmpPass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SlotsAllocs" Relationship="Self.FK_Employee_SlotsAlloc_EmailID" FromRole="Employee" ToRole="SlotsAlloc" />
+          <Property Name="OTP" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="OTPGeneratedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SlotChart">
+          <Key>
+            <PropertyRef Name="SlotID" />
+          </Key>
+          <Property Name="SlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SlotsAllocs" Relationship="Self.FK_SlotChart_SlotsAlloc_SlotID" FromRole="SlotChart" ToRole="SlotsAlloc" />
+          <NavigationProperty Name="SlotStatus" Relationship="Self.FK_SlotStatus_SlotChart_SlotID" FromRole="SlotChart" ToRole="SlotStatus" />
+        </EntityType>
+        <EntityType Name="SlotsAlloc">
+          <Key>
+            <PropertyRef Name="SlotAllocID" />
+          </Key>
+          <Property Name="SlotAllocID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SlotID" Type="Int32" Nullable="false" />
+          <Property Name="TableID" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_SlotsAlloc_EmailID" FromRole="SlotsAlloc" ToRole="Employee" />
+          <NavigationProperty Name="SlotChart" Relationship="Self.FK_SlotChart_SlotsAlloc_SlotID" FromRole="SlotsAlloc" ToRole="SlotChart" />
+          <NavigationProperty Name="TennisTable" Relationship="Self.FK_TableTennis_SlotsAlloc_TableID" FromRole="SlotsAlloc" ToRole="TennisTable" />
+        </EntityType>
+        <EntityType Name="TennisTable">
+          <Key>
+            <PropertyRef Name="TableID" />
+          </Key>
+          <Property Name="TableID" Type="Int32" Nullable="false" />
+          <Property Name="TableArena" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SlotsAllocs" Relationship="Self.FK_TableTennis_SlotsAlloc_TableID" FromRole="TennisTable" ToRole="SlotsAlloc" />
+          <NavigationProperty Name="SlotStatus" Relationship="Self.FK_SlotStatus_TennisTable_TableID" FromRole="TennisTable" ToRole="SlotStatus" />
+        </EntityType>
+        <EntityType Name="HistoryRecord">
+          <Key>
+            <PropertyRef Name="EmpID" />
+            <PropertyRef Name="EmpName" />
+            <PropertyRef Name="EmailID" />
+            <PropertyRef Name="IsOrganiser" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="UpdatedDate" />
+            <PropertyRef Name="SlotID" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Time" />
+            <PropertyRef Name="SlotAllocID" />
+            <PropertyRef Name="Status" />
+            <PropertyRef Name="TableID" />
+            <PropertyRef Name="SlotCreatedDate" />
+          </Key>
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsOrganiser" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SlotID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SlotAllocID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TableID" Type="Int32" Nullable="false" />
+          <Property Name="SlotCreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SlotUpdatedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="SlotStatu">
+          <Key>
+            <PropertyRef Name="TableID" />
+            <PropertyRef Name="SlotID" />
+          </Key>
+          <Property Name="TableID" Type="Int32" Nullable="false" />
+          <Property Name="SlotID" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="SlotChart" Relationship="Self.FK_SlotStatus_SlotChart_SlotID" FromRole="SlotStatus" ToRole="SlotChart" />
+          <NavigationProperty Name="TennisTable" Relationship="Self.FK_SlotStatus_TennisTable_TableID" FromRole="SlotStatus" ToRole="TennisTable" />
+        </EntityType>
+        <EntityType Name="vw_Employee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+            <PropertyRef Name="EmpName" />
+          </Key>
+          <Property Name="EmpID" Type="Int64" Nullable="false" />
+          <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsOrganiser" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="vw_TennisTable">
+          <Key>
+            <PropertyRef Name="TableID" />
+          </Key>
+          <Property Name="TableID" Type="Int32" Nullable="false" />
+          <Property Name="TableArena" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Employee_SlotsAlloc_EmailID">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="SlotsAlloc" Type="Self.SlotsAlloc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmailID" />
+            </Principal>
+            <Dependent Role="SlotsAlloc">
+              <PropertyRef Name="EmailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlotChart_SlotsAlloc_SlotID">
+          <End Role="SlotChart" Type="Self.SlotChart" Multiplicity="1" />
+          <End Role="SlotsAlloc" Type="Self.SlotsAlloc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotChart">
+              <PropertyRef Name="SlotID" />
+            </Principal>
+            <Dependent Role="SlotsAlloc">
+              <PropertyRef Name="SlotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlotStatus_SlotChart_SlotID">
+          <End Role="SlotChart" Type="Self.SlotChart" Multiplicity="1" />
+          <End Role="SlotStatus" Type="Self.SlotStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SlotChart">
+              <PropertyRef Name="SlotID" />
+            </Principal>
+            <Dependent Role="SlotStatus">
+              <PropertyRef Name="SlotID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TableTennis_SlotsAlloc_TableID">
+          <End Role="TennisTable" Type="Self.TennisTable" Multiplicity="1" />
+          <End Role="SlotsAlloc" Type="Self.SlotsAlloc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TennisTable">
+              <PropertyRef Name="TableID" />
+            </Principal>
+            <Dependent Role="SlotsAlloc">
+              <PropertyRef Name="TableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SlotStatus_TennisTable_TableID">
+          <End Role="TennisTable" Type="Self.TennisTable" Multiplicity="1" />
+          <End Role="SlotStatus" Type="Self.SlotStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TennisTable">
+              <PropertyRef Name="TableID" />
+            </Principal>
+            <Dependent Role="SlotStatus">
+              <PropertyRef Name="TableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GenesysProjectEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="SlotCharts" EntityType="Self.SlotChart" />
+          <EntitySet Name="SlotsAllocs" EntityType="Self.SlotsAlloc" />
+          <EntitySet Name="TennisTables" EntityType="Self.TennisTable" />
+          <EntitySet Name="HistoryRecords" EntityType="Self.HistoryRecord" />
+          <EntitySet Name="SlotStatus" EntityType="Self.SlotStatu" />
+          <EntitySet Name="vw_Employee" EntityType="Self.vw_Employee" />
+          <EntitySet Name="vw_TennisTable" EntityType="Self.vw_TennisTable" />
+          <AssociationSet Name="FK_Employee_SlotsAlloc_EmailID" Association="Self.FK_Employee_SlotsAlloc_EmailID">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="SlotsAlloc" EntitySet="SlotsAllocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlotChart_SlotsAlloc_SlotID" Association="Self.FK_SlotChart_SlotsAlloc_SlotID">
+            <End Role="SlotChart" EntitySet="SlotCharts" />
+            <End Role="SlotsAlloc" EntitySet="SlotsAllocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlotStatus_SlotChart_SlotID" Association="Self.FK_SlotStatus_SlotChart_SlotID">
+            <End Role="SlotChart" EntitySet="SlotCharts" />
+            <End Role="SlotStatus" EntitySet="SlotStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TableTennis_SlotsAlloc_TableID" Association="Self.FK_TableTennis_SlotsAlloc_TableID">
+            <End Role="TennisTable" EntitySet="TennisTables" />
+            <End Role="SlotsAlloc" EntitySet="SlotsAllocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SlotStatus_TennisTable_TableID" Association="Self.FK_SlotStatus_TennisTable_TableID">
+            <End Role="TennisTable" EntitySet="TennisTables" />
+            <End Role="SlotStatus" EntitySet="SlotStatus" />
+          </AssociationSet>
+          <FunctionImport Name="usp_BookSlot" ReturnType="Collection(String)">
+            <Parameter Name="SlotID" Mode="In" Type="String" />
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CancelBookSlot" ReturnType="Collection(String)">
+            <Parameter Name="SlotID" Mode="In" Type="String" />
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetAllEmployee" ReturnType="Collection(GenesysProjectModel.usp_GetAllEmployee_Result)" />
+          <FunctionImport Name="usp_GetAvailability" ReturnType="Collection(GenesysProjectModel.usp_GetAvailability_Result)">
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetEmployee" ReturnType="Collection(GenesysProjectModel.usp_GetEmployee_Result)">
+          <Parameter Name="EmailID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_LoginValidate" ReturnType="Collection(String)">
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+            <Parameter Name="EmpPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_RegEmployee" ReturnType="Collection(String)">
+            <Parameter Name="EmpID" Mode="In" Type="Int32" />
+            <Parameter Name="EmpName" Mode="In" Type="String" />
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+            <Parameter Name="EmpPass" Mode="In" Type="String" />
+            <Parameter Name="IsOrganiser" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_RegEmployee_True" ReturnType="Collection(GenesysProjectModel.usp_RegEmployee_Result)">
+            <Parameter Name="EmpID" Mode="In" Type="Int32" />
+            <Parameter Name="EmpName" Mode="In" Type="String" />
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+            <Parameter Name="EmpPass" Mode="In" Type="String" />
+            <Parameter Name="IsOrganiser" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_LoginValidate_true" ReturnType="Collection(GenesysProjectModel.usp_LoginValidate_true_Result)">
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+            <Parameter Name="EmpPass" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="vw_Login" EntityType="GenesysProjectModel.vw_Login" />
+          <FunctionImport Name="usp_GetBooking" ReturnType="Collection(DateTime)">
+          <Parameter Name="EmailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetBookedHistoryList" ReturnType="Collection(GenesysProjectModel.usp_GetBookedHistoryList_Result)">
+          <Parameter Name="EmailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdateEmployee" ReturnType="Collection(String)">
+            <Parameter Name="EmpID" Mode="In" Type="Int32" />
+            <Parameter Name="EmpName" Mode="In" Type="String" />
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+            <Parameter Name="EmpPass" Mode="In" Type="String" />
+            <Parameter Name="IsOrganiser" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="usp_EmailValidate" ReturnType="Collection(String)">
+          <Parameter Name="EmailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdateSlot">
+            <Parameter Name="BookingSlotID" Mode="In" Type="String" />
+            <Parameter Name="CancellationSlotID" Mode="In" Type="String" />
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdateSlotResult" ReturnType="Collection(String)">
+            <Parameter Name="BookingSlotID" Mode="In" Type="String" />
+            <Parameter Name="CancellationSlotID" Mode="In" Type="String" />
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="usp_GetAllEmployee_Result">
+          <Property Type="Int32" Name="EmpID" Nullable="false" />
+          <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EmailID" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="IsOrganiser" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_GetAvailability_Result">
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="Int32" Name="SlotID" Nullable="false" />
+          <Property Type="String" Name="Time" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="SeatsAvailable" Nullable="true" />
+          <Property Type="Int32" Name="IsAvailable" Nullable="false" />
+          <Property Type="String" Name="EmpName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetEmployee_Result">
+          <Property Type="Int32" Name="EmpID" Nullable="false" />
+          <Property Type="String" Name="EmpName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EmailID" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="IsOrganiser" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="usp_RegEmployee_Result">
+          <Property Type="String" Name="result" Nullable="false" MaxLength="8" />
+        </ComplexType>
+        <ComplexType Name="usp_LoginValidate_true_Result">
+          <Property Type="String" Name="Outcome" Nullable="false" MaxLength="18" />
+        </ComplexType>
+        <EntityType Name="vw_Login">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Password" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="usp_GetBookedHistoryList_Result">
+          <Property Type="DateTime" Name="Date" Nullable="false" />
+          <Property Type="String" Name="Time" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="TableID" Nullable="false" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="PlayedWith" Nullable="true" />
+          <Property Type="String" Name="nthLastWeek" Nullable="true" MaxLength="3" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GenesysProjectModelStoreContainer" CdmEntityContainer="GenesysProjectEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="GenesysProjectModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="OTPGeneratedDateTime" ColumnName="OTPGeneratedDateTime" />
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="IsOrganiser" ColumnName="IsOrganiser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="EmpPass" ColumnName="EmpPass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlotCharts">
+            <EntityTypeMapping TypeName="GenesysProjectModel.SlotChart">
+              <MappingFragment StoreEntitySet="SlotChart">
+                <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlotsAllocs">
+            <EntityTypeMapping TypeName="GenesysProjectModel.SlotsAlloc">
+              <MappingFragment StoreEntitySet="SlotsAlloc">
+                <ScalarProperty Name="SlotAllocID" ColumnName="SlotAllocID" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+                <ScalarProperty Name="TableID" ColumnName="TableID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TennisTables">
+            <EntityTypeMapping TypeName="GenesysProjectModel.TennisTable">
+              <MappingFragment StoreEntitySet="TennisTable">
+                <ScalarProperty Name="TableID" ColumnName="TableID" />
+                <ScalarProperty Name="TableArena" ColumnName="TableArena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryRecords">
+            <EntityTypeMapping TypeName="GenesysProjectModel.HistoryRecord">
+              <MappingFragment StoreEntitySet="HistoryRecord">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="IsOrganiser" ColumnName="IsOrganiser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="SlotAllocID" ColumnName="SlotAllocID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TableID" ColumnName="TableID" />
+                <ScalarProperty Name="SlotCreatedDate" ColumnName="SlotCreatedDate" />
+                <ScalarProperty Name="SlotUpdatedDate" ColumnName="SlotUpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SlotStatus">
+            <EntityTypeMapping TypeName="GenesysProjectModel.SlotStatu">
+              <MappingFragment StoreEntitySet="SlotStatus">
+                <ScalarProperty Name="TableID" ColumnName="TableID" />
+                <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_Employee">
+            <EntityTypeMapping TypeName="GenesysProjectModel.vw_Employee">
+              <MappingFragment StoreEntitySet="vw_Employee">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="IsOrganiser" ColumnName="IsOrganiser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_TennisTable">
+            <EntityTypeMapping TypeName="GenesysProjectModel.vw_TennisTable">
+              <MappingFragment StoreEntitySet="vw_TennisTable">
+                <ScalarProperty Name="TableID" ColumnName="TableID" />
+                <ScalarProperty Name="TableArena" ColumnName="TableArena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_BookSlot" FunctionName="GenesysProjectModel.Store.usp_BookSlot" />
+          <FunctionImportMapping FunctionImportName="usp_CancelBookSlot" FunctionName="GenesysProjectModel.Store.usp_CancelBookSlot" />
+          <FunctionImportMapping FunctionImportName="usp_GetAllEmployee" FunctionName="GenesysProjectModel.Store.usp_GetAllEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenesysProjectModel.usp_GetAllEmployee_Result">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="IsOrganiser" ColumnName="IsOrganiser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetAvailability" FunctionName="GenesysProjectModel.Store.usp_GetAvailability">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenesysProjectModel.usp_GetAvailability_Result">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SlotID" ColumnName="SlotID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="SeatsAvailable" ColumnName="SeatsAvailable" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetEmployee" FunctionName="GenesysProjectModel.Store.usp_GetEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenesysProjectModel.usp_GetEmployee_Result">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="IsOrganiser" ColumnName="IsOrganiser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_LoginValidate" FunctionName="GenesysProjectModel.Store.usp_LoginValidate" />
+          <FunctionImportMapping FunctionImportName="usp_RegEmployee" FunctionName="GenesysProjectModel.Store.usp_RegEmployee" />
+          <FunctionImportMapping FunctionImportName="usp_RegEmployee_True" FunctionName="GenesysProjectModel.Store.usp_RegEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenesysProjectModel.usp_RegEmployee_Result">
+                <ScalarProperty Name="result" ColumnName="result" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_LoginValidate_true" FunctionName="GenesysProjectModel.Store.usp_LoginValidate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenesysProjectModel.usp_LoginValidate_true_Result">
+                <ScalarProperty Name="Outcome" ColumnName="Outcome" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="vw_Login">
+            <EntityTypeMapping TypeName="GenesysProjectModel.vw_Login">
+              <MappingFragment StoreEntitySet="vw_Login">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetBooking" FunctionName="GenesysProjectModel.Store.usp_GetBooking" />
+          <FunctionImportMapping FunctionImportName="usp_GetBookedHistoryList" FunctionName="GenesysProjectModel.Store.usp_GetBookedHistoryList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GenesysProjectModel.usp_GetBookedHistoryList_Result">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="TableID" ColumnName="TableID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="PlayedWith" ColumnName="PlayedWith" />
+                <ScalarProperty Name="nthLastWeek" ColumnName="nthLastWeek" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_UpdateEmployee" FunctionName="GenesysProjectModel.Store.usp_UpdateEmployee" />
+          <FunctionImportMapping FunctionImportName="usp_EmailValidate" FunctionName="GenesysProjectModel.Store.usp_EmailValidate" />
+          <FunctionImportMapping FunctionImportName="usp_UpdateSlot" FunctionName="GenesysProjectModel.Store.usp_UpdateSlot" />
+          <FunctionImportMapping FunctionImportName="usp_UpdateSlotResult" FunctionName="GenesysProjectModel.Store.usp_UpdateSlot" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,492 @@
+﻿html, body {
+    height: 100%;
+}
+
+body {
+    display: table;
+    width: 100%;
+}
+
+/*** Header and Footer ***/
+.page-header {
+    background-color: #000;
+    height: 102px;
+    margin: 0px 0 50px;
+    color: #fff;
+}
+
+#logo {
+    background-color: #000;
+    width: 220px;
+    height: 102px;
+}
+
+.caption {
+    text-align: right;
+    display: none;
+}
+
+.caption h4, .caption h3 {
+    display: inline-block;
+}
+.page-footer {
+    clear: both;
+    background-color: #000;
+    height: 70px;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.page-row {
+    display: table-row;
+}
+
+.page-row-expanded {
+    height: 100%;
+}
+/*#mainContainer {
+    position: relative;
+    top: 50%;
+}*/
+.footerText {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 25px;
+    position: relative;
+    text-align: right;
+}
+.modal {
+    top: 25%;
+}
+
+/*** Login Page, Register Page & ResetPswrd Page***/
+#loginTable tr td, #registerForm tr td, #newBooking tr td, #updateBooking tr td, #sendOTPTable tr td, #resetPswrdTable tr td {
+    border: none;
+}
+
+#loginTable .tableHeader, #registerForm .tableHeader, #sendOTPTable .tableHeader, #resetPswrdTable .tableHeader {
+    font-family: Century;
+    font-size: 20px;
+}
+
+#loginForm .btnLong, #registerForm .btnLong {
+    width: 100%;
+}
+
+#sendOTPTable .btnMid, #resetPswrdTable .btnMid {
+    width: 17%;
+    min-width: 100px;
+    margin: 10px;
+}
+
+#loginForm label, #registerForm label {
+    margin-top: 12px;
+}
+
+#sendOTPTable label {
+    margin-top: 50px;
+}
+
+#registerForm #txtConfPassword {
+    margin-bottom: 12px;
+}
+
+#loginForm {
+    min-width: 300px;
+    /*margin-top: 150px;*/
+}
+
+/*#registerForm {
+    margin-top: 50px;
+}
+
+#resetPswrdForm {
+    margin-top: 150px;
+}*/
+
+#divErrorTitle {
+    font-weight: bold;
+    border-bottom: 2px solid rgb(169, 73, 71);
+}
+
+#divErrorDesc {
+    padding-top: 10px;
+}
+
+#registerForm .modal-dialog {
+    margin-top: 10%;
+}
+#registerForm #validateEmailBox {
+    display: none;
+}
+#registerForm #txtValidateOTP {
+    width: 100px;
+}
+#validateEmailBox label{
+    font-size: 10px;
+    /*width: 80%;*/
+}
+#registerTable #txtEmail {
+    border-right: none;
+}
+#btnvalidateEmail, #btnvalidateEmail:active, #btnvalidateEmail:hover  {
+    font-size: 18px;
+    height: 34px;
+    padding: 3px 10px;
+    color: rgba(28, 138, 28, 0.70);
+    background-color: #fff;
+    border-color: #ccc;
+    border-left: none;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+#validateEmailBox .fa-spin {
+    color: rgba(134, 240, 134,0.7)  ;
+}
+/*#validateEmailBox #btnvalidateEmail {
+    margin-top: 8px;
+    color: black;
+    border: 1px solid #ccc;
+    font-size: 10px;
+}
+#validateEmailBox #btnvalidateEmail:hover, #validateEmailBox #btnvalidateEmail.validateActive {
+    color: #fff;
+    background-color: #47a447;
+    border-color: #398439;
+}*/
+.required {
+    color: rgb(255, 0, 0);
+}
+#Logout {
+    position: relative;
+    top: -86px;
+    right: 7px;
+    padding: 4px 16px;
+    font-size: 12px;
+    display: none;
+}
+/*.logout {
+    text-align: end;
+    display: none;
+}
+
+    .logout a:link, .logout a:active, .logout a:visited {
+        color: #fff;
+        text-decoration: none;
+        font-size: 12px;
+        font-style: italic;
+    }
+
+    .logout a:hover {
+        text-decoration: underline;
+    }*/
+
+#forgotPswrd {
+    text-align: right;
+    margin-top: -8px;
+    margin-bottom: 15px;
+}
+
+    #forgotPswrd a:link, #forgotPswrd a:active, #forgotPswrd a:visited, #signInLink a:link, #signInLink a:active, #signInLink a:visited {
+        color: #428bca;
+        text-decoration: none;
+    }
+
+    #forgotPswrd a:hover, #signInLink a:hover {
+        color: #428bca;
+        text-decoration: underline;
+    }
+
+#signInLink {
+    text-align: center;
+}
+
+#registerForm .well, #resetPswrdForm .well {
+    padding-bottom: 0;
+}
+
+#sendOTPTable #txtResetUsername {
+    width: 45%;
+    margin-left: 15px;
+    min-width: 178px;
+}
+#sendOTPTable .otpExist {
+    display:inline-block;
+    width: 125px;
+    padding-top: 12px;
+}
+#sendOTPTable .otpExist  a:link, #sendOTPTable .otpExist  a:visited, #sendOTPTable .otpExist  a:active {
+    font-size: 12px;
+    color: #428bca;
+    text-decoration: none;
+}
+#sendOTPTable .otpExist  a:hover {
+    text-decoration: underline;
+}
+#sendOTPTable .btn-container {
+    display: inline;
+}
+#btnSendOTP span {
+    margin-left: 3px;
+    z-index: 11;
+}
+
+/*#sendOTPTable #btnSendOTP, #sendOTPTable #cancelSendOTP {
+    margin: 10px;
+}*/
+.resetEmailDescp {
+    font-size: 12px;
+    padding-top: 15px;
+}
+
+#resetPswrdFormContainer {
+    min-width: 352px;
+}
+
+#resetPswrdTable {
+    display: none;
+}
+
+    #resetPswrdTable input[type=text], #resetPswrdTable input[type=password] {
+        width: 40%;
+        min-width: 200px;
+        display: inline-block;
+    }
+
+    #resetPswrdTable label {
+        width: 15%;
+        min-width: 165px;
+    }
+
+    #resetPswrdTable tr:first-child label {
+        margin-top: 40px;
+    }
+
+
+/*#bookSlotForm #tab-container {
+    margin-top: -4px;
+    position: relative;
+    border-color: #ff6a00;
+    background-color: rgba(255, 106, 0, 0.11)
+}
+#bookSlotForm .nav-pills>li.active>a,#bookSlotForm  .nav-pills>li.active>a:hover,#bookSlotForm  .nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #ff6a00;
+}
+#bookSlotForm .nav-pills>li>a {
+    color: #ff6a00;
+    border-top: 1px solid #ff6a00;
+    border-left: 1px solid #ff6a00;
+}*/
+
+
+/*** BookSlot Page ***/
+#bookSlotForm .tab-content {
+    padding: 10px;
+}
+
+#bookSlotForm .table thead > tr > th {
+    border-bottom: none;
+}
+
+#bookSlotForm #tab-container {
+    margin-top: 4px;
+    border-color: #fff;
+    background-color: #fff;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0);
+}
+
+#bookSlotForm .slotbox {
+    height: 60px;
+    width: 116px;
+    background-color: #fff;
+    border: 2px solid rgba(128, 128, 128, 0.28);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+#bookSlotForm .slotStatus {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+#bookSlotForm .slotbox:hover {
+    color: #fff;
+    background-color: rgba(255, 106, 0, 0.7);
+}
+
+#bookSlotForm .active.slotbox {
+    color: #fff;
+    background-color: rgba(255, 106, 0, 0.95);
+}
+
+#bookSlotForm .avlSlot {
+    background-color: rgba(60, 237, 61, 0.2);
+    cursor: pointer;
+}
+
+#bookSlotForm .prefAvlSlot {
+    background-color: rgba(134, 240, 134,0.7);
+    cursor: pointer;
+}
+
+#bookSlotForm .unavlSlot, #bookSlotForm .slotbox.unavlSlot:hover {
+    background-color: rgba(20, 17, 17, 0.33);
+    color: #fff;
+}
+
+#bookSlotForm .fullyBookedSlot, #bookSlotForm .slotbox.fullyBookedSlot:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+    color: #fff;
+}
+
+#bookSlotForm .bookedSlot, #bookSlotForm .slotbox.bookedSlot:hover {
+    background-color: rgba(255, 106, 0, 0.95);
+    color: #fff !important;
+}
+
+#bookSlotForm .container {
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+#bookSlotForm .btn-group > .btn:last-child:not(:first-child) {
+    border-radius: 0;
+}
+
+#bookSlotForm .btn-group > .btn:first-child:not(:last-child) {
+    border-radius: 0;
+    margin-left: -1px;
+}
+
+#bookSlotForm .btnLong {
+    width: 15%;
+}
+
+#bookSlotForm #btnBook, #bookSlotForm #btnSave {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#bookSlotForm .datepickerContainer, #bookSlotForm #btnClear {
+    margin-right: 25px;
+}
+
+#updateBooking #btn-dateDropdown {
+    border: 1px solid #ccc;
+    margin-right: -1px;
+}
+
+#bookSlotForm .table-responsive {
+    border: none;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+table#historyTable {
+    width: 100%;
+}
+#history .table-responsive {
+    font-family: "Segoe UI";
+}
+#history select, #history input[type="search"] {
+    height: 30px;
+    padding: 2px 6px;
+    font-size: 12px;
+    line-height: 1.428571429;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+#history input[type="search"] {
+    margin-right: 0;
+}
+#historyTable th {
+    background-color: #428bca;
+    color: #fff;
+    font-weight: 400;
+}
+#historyTable th:first-child {
+    border-top-left-radius: 5%;
+}
+#historyTable th:last-child {
+    border-top-right-radius: 5%;
+}
+#historyTable tbody {
+    font-size: 12px;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: #fff !important;
+    background: #428bca;
+    border-radius: 5%;
+    border: 1px solid #428bca;
+}
+ .dataTables_wrapper .dataTables_paginate .paginate_button {
+    /*color: #fff !important;
+    background: #428bca;*/
+    border-radius: 5%;
+    /*border: 1px solid #428bca;*/
+}
+.useStatus {
+    font-size: 12px;
+    font-style: italic;
+    padding-left: 15px;
+    color: rgba(255, 106, 0, 0.95);
+}
+
+dl.slotLegendBox 
+{
+    margin: 10px 15px -5px;
+    font-size: 11px;
+    cursor: pointer;
+    min-width: 464px;
+}
+
+.slotLegendBox dt
+{
+   display: inline-block;
+   height: 15px;
+   width: 15px;
+   margin-right: 5px;
+   border: 1px solid rgba(128, 128, 128, 0.28);
+   border-radius: 20%;
+   vertical-align: sub;
+}  
+.slotLegendBox dd
+{
+   display: inline;
+   margin-right: 10px;
+}  
+.modal-header {
+    background-color: #428bca;
+    color: white;
+}
+.modal-footer {
+    border-top: none;
+}
+/*#bookSlotForm .prefAvlSlot .slotStatus {
+    font-weight: 800;
+}*/
+/*.blink_me {
+    animation: blinker 3s linear infinite;
+}
+@keyframes blinker {  
+    50% { opacity: 0; color: rgba(255, 106, 0, 0.9);}
+}*/

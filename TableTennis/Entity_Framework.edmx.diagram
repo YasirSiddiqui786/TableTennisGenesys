@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2006ffa56b1549fea6cf3742be44b157" Name="Diagram1">
+        <EntityTypeShape EntityType="GenesysProjectModel.Employee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GenesysProjectModel.SlotChart" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GenesysProjectModel.SlotsAlloc" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GenesysProjectModel.TennisTable" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="GenesysProjectModel.HistoryRecord" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GenesysProjectModel.SlotStatu" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GenesysProjectModel.vw_Employee" Width="1.5" PointX="2.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GenesysProjectModel.vw_TennisTable" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="GenesysProjectModel.FK_Employee_SlotsAlloc_EmailID" ManuallyRouted="false" />
+        <AssociationConnector Association="GenesysProjectModel.FK_SlotChart_SlotsAlloc_SlotID" ManuallyRouted="false" />
+        <AssociationConnector Association="GenesysProjectModel.FK_SlotStatus_SlotChart_SlotID" ManuallyRouted="false" />
+        <AssociationConnector Association="GenesysProjectModel.FK_TableTennis_SlotsAlloc_TableID" ManuallyRouted="false" />
+        <AssociationConnector Association="GenesysProjectModel.FK_SlotStatus_TennisTable_TableID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GenesysProjectModel.vw_Login" Width="1.5" PointX="8.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

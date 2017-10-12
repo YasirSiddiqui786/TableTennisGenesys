@@ -1,0 +1,76 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    
+<%--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />--%>
+    <link href="Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="Content/Common.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    
+    <%--<script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>--%>    
+   <%--  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>--%><%--    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>--%>
+    
+    <script src="/Scripts/moment.min.js"></script>
+    <script src="/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="/Scripts/jquery.dataTables.min.js"></script>
+
+    <div class="page-header">
+        <img src="/Images/GEN_id_color_rev_rgb.png" id="logo" class="img-responsive img-thumbnail pull-left" alt="Responsive image" />
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 pull-right">
+            <div class="caption">
+                <h3>Hi </h3>
+                <h4 id="userName" runat="server">User</h4>
+            </div>
+            <div>
+            </div>
+        </div>
+    </div>
+    <div id="mainContainer">
+        <form runat="server">
+            <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true" />
+            <asp:Button ID="Logout" runat="server" class=" btn pull-right" OnClick="Logout_Click" Text="Logout" />
+
+        </form>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder2" runat="server"></asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder3" runat="server"></asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder4" runat="server"></asp:ContentPlaceHolder>
+    </div>
+
+    <div class="page-footer page-row"><div class="footerText">Copyright © 2017 Genesys. All rights reserved.</div></div>
+
+    <script type="text/javascript">    
+    
+        function setUserName()
+        {
+            var userName = $("#userName");
+            var inSession = <%= "'" + Session["UserName"] + "'"%>;
+            inSession =inSession.toString().split(" ")[0];
+            userName.text(inSession) ;
+        }
+        
+    </script>
+
+</body>
+</html>

@@ -114,102 +114,102 @@
     <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\SlotStatus.sql">
+    <None Include="dbo\Tables\SlotStatus.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\SlotChart.sql">
+    </None>
+    <None Include="dbo\Tables\SlotChart.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\TennisTable.sql">
+    </None>
+    <None Include="dbo\Tables\TennisTable.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\Employee.sql">
+    </None>
+    <None Include="dbo\Tables\Employee.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\SlotsAlloc.sql">
+    </None>
+    <None Include="dbo\Tables\SlotsAlloc.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\HistoryRecord.sql">
+    </None>
+    <None Include="dbo\Tables\HistoryRecord.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Tables\Credentials.sql">
+    </None>
+    <None Include="dbo\Tables\Credentials.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Views\vw_Login.sql">
+    </None>
+    <None Include="dbo\Views\vw_Login.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Views\vw_Employee.sql">
+    </None>
+    <None Include="dbo\Views\vw_Employee.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Views\vw_TennisTable.sql">
+    </None>
+    <None Include="dbo\Views\vw_TennisTable.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Views\vw_LoginDetails.sql">
+    </None>
+    <None Include="dbo\Views\vw_LoginDetails.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="Security\Admin.sql" />
-    <Build Include="Security\GenesysTT.sql" />
-    <Build Include="Security\GenesysTT_1.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
-    <Build Include="dbo\Stored Procedures\usp_GetBookedHistoryList.sql">
+    </None>
+    <None Include="Security\Admin.sql" />
+    <None Include="Security\GenesysTT.sql" />
+    <None Include="Security\GenesysTT_1.sql" />
+    <None Include="Security\RoleMemberships.sql" />
+    <None Include="dbo\Stored Procedures\usp_GetBookedHistoryList.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_UpdateEmployee.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_UpdateEmployee.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_EmailValidate.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_EmailValidate.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_CancelBookSlot.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_CancelBookSlot.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_GetEmployee.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_GetEmployee.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_GetAllEmployee.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_GetAllEmployee.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_RegEmployee.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_RegEmployee.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_LoginValidate.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_LoginValidate.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_UpdateSlot.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_UpdateSlot.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_BookSlot.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_BookSlot.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_GetAvailability.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_GetAvailability.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="dbo\Stored Procedures\usp_GetBooking.sql">
+    </None>
+    <None Include="dbo\Stored Procedures\usp_GetBooking.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
-    </Build>
-    <Build Include="Security\Permissions.sql" />
+    </None>
+    <None Include="Security\Permissions.sql" />
   </ItemGroup>
 </Project>

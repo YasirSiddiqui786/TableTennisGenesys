@@ -14,15 +14,13 @@ namespace TableTennis.Controllers
     public class LoginController : ApiController
     {
         GenesysProjectEntities entities = new GenesysProjectEntities();
-
-
         [HttpPost]
         public HttpResponseMessage validate(Employee emp)
         {
             string encPassword;
             var emailID_lowercase = emp.EmailID.ToLower();
-            HttpContext.Current.Session["UserEmail"] = emp.EmailID;  // session of email ID final
-            #region
+            HttpContext.Current.Session["UserEmail"] = emp.EmailID;  // Session of user as Email ID
+            #region DecryptEnteredPassword
             Encrypt_Decrypt ObjEnc = new Encrypt_Decrypt();
             ObjEnc.Password = emp.EmpPass;//Providing Password to Encrypt
             ObjEnc.saltValue = "sALtValue";
@@ -41,10 +39,7 @@ namespace TableTennis.Controllers
             }
             if (entity != null && resultStore == "Match")
             {
-
-
                 return Request.CreateResponse(HttpStatusCode.OK, entity[0]);
-
             }
             else
             {
@@ -52,7 +47,7 @@ namespace TableTennis.Controllers
             }
 
         }
-       
-       
+
+
     }
 }

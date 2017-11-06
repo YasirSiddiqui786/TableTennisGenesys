@@ -7,38 +7,40 @@ using System.Net;
 using System.Net.Mail;
 using System.Data;
 using System.Threading.Tasks;
-using SendGrid;
-using SendGrid.Helpers.Mail;
+
 
 
 namespace TableTennis
 {
     public class SendEmail
     {
-        public int _SendEmail(String SenderMail, String SenderMailPassword, String ReceiverEmailID, String MessageText, String MessageSubject)
+        public int _SendEmail(string senderEmailID, string receiverEmailID, string messageSubject, string messageBody)
         {
-            var apiKey = "";//Get Key from Yasir //System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress(""/*Get Email Id from Yasir*/, "YasirAdmin"),
-                Subject = MessageSubject,
-                PlainTextContent = "Hello, Email!",
-                HtmlContent = MessageText
-            };
-            msg.AddTo(new EmailAddress(ReceiverEmailID, ReceiverEmailID));
+
+            MailMessage completeMessage = new MailMessage(senderEmailID, receiverEmailID, messageSubject, messageBody);
+
+            //smtp client at mail server location
+            string domainName = "", mailuserName = "no-reply@qfun.com", mailPassword = "";
+            int portNum = 25;
+            SmtpClient client = new SmtpClient(domainName);
+            client.Port = portNum;
+
+            // add credentials
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential(mailuserName, mailPassword);
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            //client.EnableSsl = true;
+
             try
             {
-
-                var response =  client.SendEmailAsync(msg);
+                client.Send(completeMessage);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                ex.Message.ToString();
-                return 0;
+                throw;
             }
             return 1;
         }
-        
-        }
+
     }
+}

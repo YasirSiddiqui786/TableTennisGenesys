@@ -12,7 +12,7 @@ namespace TableTennis.Controllers
     {
 
         GenesysProjectEntities entities = new GenesysProjectEntities();
-        [HttpPost]//, Route("api/Reset/UpdatePass")]
+        [HttpPost]
         public HttpResponseMessage UpdatePass(Employee emp)
 
         {
@@ -22,7 +22,17 @@ namespace TableTennis.Controllers
             if (emp.OTP.ToString().Equals(System.Web.HttpContext.Current.Session["GeneratedOTP"]) &&
                 dtNow.Subtract(dtOtp).TotalMinutes < 16)
             {
-                var entity = entities.usp_UpdateEmployee(x, x.ToString(), HttpContext.Current.Session["UserEmail"].ToString(), emp.EmpPass, false);
+                #region EncryptNewPassword 
+                Encrypt_Decrypt ObjEnc = new Encrypt_Decrypt();
+                ObjEnc.Password = emp.EmpPass;//Providing Password to Encrypt
+                ObjEnc.saltValue = "sALtValue";
+                ObjEnc.passwordIterations = 7;
+                ObjEnc.initVector = "~1B2c3D4e5F6g7H8";
+                ObjEnc.keySize = 256;
+                string encPassword = ObjEnc.Encrypt(ObjEnc);
+                #endregion 
+                //Updating the new password as encrypted value in db
+                var entity = entities.usp_UpdateEmployee(x, x.ToString(), HttpContext.Current.Session["UserEmail"].ToString(), encPassword, false);
                 if (entity != null)
                     return Request.CreateResponse(HttpStatusCode.Created, entity);
                 else
@@ -46,6 +56,8 @@ namespace TableTennis.Controllers
             string resultStore = entity[0];
             if (entity != null && resultStore == "Email Exist")
             {
+
+                #region SendOTP
                 var CharPool = "0123456789";
                 var stringChars = new char[6];
                 var random = new Random();
@@ -54,19 +66,20 @@ namespace TableTennis.Controllers
                 {
                     stringChars[i] = CharPool[random.Next(CharPool.Length)];
                 }
-
+                #endregion
                 System.Web.HttpContext.Current.Session["GeneratedOTP"] = new String(stringChars);
-
                 try
                 {
                     SendEmail send = new SendEmail();
                     System.Web.HttpContext.Current.Session["OTPTimeStamp"] = DateTime.Now;
-                    int x = send._SendEmail("Email", "Pass", e.EmailID.ToString(), "Hi, The OTP is : " + System.Web.HttpContext.Current.Session["GeneratedOTP"], "Password Reset OTP");
+                    //Send Email with OTP valid for 15 mins
+                    int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "Password Reset OTP", "Hi, The OTP is : " + System.Web.HttpContext.Current.Session["GeneratedOTP"]);
+
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }
+                #region ErrorHandling
                 catch (Exception ex)
                 {
-
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Error Sending Email");
                 }
 
@@ -75,9 +88,7 @@ namespace TableTennis.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Invalid EmailID");
             }
+            #endregion
         }
-
-
-
     }
 }

@@ -16,39 +16,35 @@ namespace TableTennis.Controllers
     public class BookslotController : ApiController
     {
         GenesysProjectEntities entities = new GenesysProjectEntities();
-        [HttpPost,Route("api/Bookslot/book")]
+
+        [HttpPost, Route("api/Bookslot/book")]
         public HttpResponseMessage book(int[] slots)
         {
-            // converting slots int array to comma separated string slotList
+            //Converting slots int array to comma separated string slotList
             var slotList = string.Join(",", slots);
 
+            //Booking list of slots at once
             var entity = entities.usp_BookSlot(slotList, System.Web.HttpContext.Current.Session["UserEmail"].ToString());
             if (entity != null)
             {
                 SendEmail send = new SendEmail();
-                int x = send._SendEmail("Email", "Pass", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "Hi, Thanks for booking!!!!!!!", "Booked a new slot");
-              return Request.CreateResponse(HttpStatusCode.Created, entity);
-
+                int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "New Slot Booked", "Hi, Thanks for booking");
+                return Request.CreateResponse(HttpStatusCode.Created, entity);
             }
             else
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No new slot selected for booking");
             }
-
-          
         }
-     
+
         [HttpPost, Route("api/Bookslot/update")]
         public HttpResponseMessage update(string[] list)
         {
-            
-            var temp = list[0].ToString();
-            string[] slots = temp.Split(':');
-            var updateSlots = slots[0];
-            var cancelSlots = slots[1];
-      
-           
 
+            var temp = list[0].ToString();//Contains all slots first half as updated and second half as cancelled
+            string[] slots = temp.Split(':');
+            var updateSlots = slots[0];//has list of updated slots
+            var cancelSlots = slots[1];//has list of cancelled slotsS
             var entity1 = entities.usp_UpdateSlotResult(updateSlots, cancelSlots, System.Web.HttpContext.Current.Session["UserEmail"].ToString());
             if (entity1 != null)
             {

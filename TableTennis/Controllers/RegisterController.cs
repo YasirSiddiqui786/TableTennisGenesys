@@ -47,9 +47,9 @@ namespace TableTennis.Controllers
                 string encPassword;
                 var empname_Corrected = new System.Globalization.CultureInfo("en-US", false).TextInfo.ToTitleCase(emp.EmpName.ToLower());
                 //Module for Encryption
-                #region
+                #region EncryptPassword
                 Encrypt_Decrypt ObjEnc = new Encrypt_Decrypt();
-                ObjEnc.Password = emp.EmpPass;//Providing Password to Encrypt
+                ObjEnc.Password = emp.EmpPass;
                 ObjEnc.saltValue = "sALtValue";
                 ObjEnc.passwordIterations = 7;
                 ObjEnc.initVector = "~1B2c3D4e5F6g7H8";
@@ -70,6 +70,7 @@ namespace TableTennis.Controllers
             }
             else return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Incorrect OTP");
         }
+
         public void SendRegisterOTP(Employee e)
         {
 
@@ -91,7 +92,7 @@ namespace TableTennis.Controllers
 
             SendEmail send = new SendEmail();
             System.Web.HttpContext.Current.Session["OTPTimeStamp"] = DateTime.Now;
-            int x = send._SendEmail("Email", "Pass", e.EmailID.ToString(), "Hi, The OTP for registration is : " + System.Web.HttpContext.Current.Session["GeneratedOTP"], "Registration OTP");
+            int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "Registration OTP", "Hi, The OTP for registration is : " + System.Web.HttpContext.Current.Session["GeneratedOTP"]);
 
         }
 

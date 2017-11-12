@@ -73,7 +73,7 @@ namespace TableTennis.Controllers
                     SendEmail send = new SendEmail();
                     System.Web.HttpContext.Current.Session["OTPTimeStamp"] = DateTime.Now;
                     //Send Email with OTP valid for 15 mins
-                    int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "Password Reset OTP", "Hi, The OTP is : " + System.Web.HttpContext.Current.Session["GeneratedOTP"]);
+                    int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(),"OTP for password reset" ,"Hi,<br><br>The OTP for resetting the password is : "+ System.Web.HttpContext.Current.Session["GeneratedOTP"] +"<br><br>Regards,<br>RYM Team");
 
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }

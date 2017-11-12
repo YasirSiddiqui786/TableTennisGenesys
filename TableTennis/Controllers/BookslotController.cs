@@ -28,7 +28,7 @@ namespace TableTennis.Controllers
             if (entity != null)
             {
                 SendEmail send = new SendEmail();
-                int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "New Slot Booked", "Hi, Thanks for booking");
+                int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "New Slot Booked", "Hi "+ System.Web.HttpContext.Current.Session["UserName"] + ", Thanks for booking");
                 return Request.CreateResponse(HttpStatusCode.Created, entity);
             }
             else
@@ -48,6 +48,8 @@ namespace TableTennis.Controllers
             var entity1 = entities.usp_UpdateSlotResult(updateSlots, cancelSlots, System.Web.HttpContext.Current.Session["UserEmail"].ToString());
             if (entity1 != null)
             {
+                SendEmail send = new SendEmail();
+                int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "Slot Updated", "Hi " + System.Web.HttpContext.Current.Session["UserName"] + ", Thanks for booking");
                 return Request.CreateResponse(HttpStatusCode.Created, entity1);
 
             }

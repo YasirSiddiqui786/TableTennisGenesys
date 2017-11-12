@@ -19,6 +19,7 @@
         <AssociationConnector Association="GenesysProjectModel.FK_TableTennis_SlotsAlloc_TableID" ManuallyRouted="false" />
         <AssociationConnector Association="GenesysProjectModel.FK_SlotStatus_TennisTable_TableID" ManuallyRouted="false" />
         <EntityTypeShape EntityType="GenesysProjectModel.vw_Login" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="GenesysProjectModel.Feedback" Width="1.5" PointX="4" PointY="1.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

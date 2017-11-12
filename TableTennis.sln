@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTennis", "TableTennis\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableTennis.Tests", "TableTennis.Tests\TableTennis.Tests.csproj", "{E007F1F7-4FE6-4DF6-A3C3-CF8FA595D91F}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TableTennisDb", "TableTennisDb\TableTennisDb.sqlproj", "{9BC3CCB8-D1C7-4EA0-9CF8-5AE7E33F9125}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +21,6 @@ Global
 		{E007F1F7-4FE6-4DF6-A3C3-CF8FA595D91F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E007F1F7-4FE6-4DF6-A3C3-CF8FA595D91F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E007F1F7-4FE6-4DF6-A3C3-CF8FA595D91F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BC3CCB8-D1C7-4EA0-9CF8-5AE7E33F9125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BC3CCB8-D1C7-4EA0-9CF8-5AE7E33F9125}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BC3CCB8-D1C7-4EA0-9CF8-5AE7E33F9125}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{9BC3CCB8-D1C7-4EA0-9CF8-5AE7E33F9125}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BC3CCB8-D1C7-4EA0-9CF8-5AE7E33F9125}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BC3CCB8-D1C7-4EA0-9CF8-5AE7E33F9125}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

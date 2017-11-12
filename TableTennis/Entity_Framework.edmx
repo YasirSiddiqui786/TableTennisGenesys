@@ -20,6 +20,17 @@
           <Property Name="OTPGeneratedDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'GenesysProject.dbo.Feedback' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="EmailID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FeedbackType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="500" />
+          <Property Name="FeedbackDateTime" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'GenesysProject.dbo.HistoryRecord' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="HistoryRecord">
           <Key>
@@ -217,6 +228,11 @@ warning 6002: The table/view 'GenesysProject.dbo.vw_TennisTable' does not have a
           <Parameter Name="EmpPass" Type="nvarchar" Mode="In" />
           <Parameter Name="IsOrganiser" Type="bit" Mode="In" />
         </Function>
+        <Function Name="usp_SetFeedback" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FeedbackType" Type="nvarchar" Mode="In" />
+          <Parameter Name="Comments" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="usp_UpdateEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpID" Type="int" Mode="In" />
           <Parameter Name="EmpName" Type="nvarchar" Mode="In" />
@@ -234,6 +250,14 @@ warning 6002: The table/view 'GenesysProject.dbo.vw_TennisTable' does not have a
           <EntitySet Name="SlotChart" EntityType="Self.SlotChart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SlotsAlloc" EntityType="Self.SlotsAlloc" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TennisTable" EntityType="Self.TennisTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Feedback].[EmailID] AS [EmailID], 
+    [Feedback].[FeedbackType] AS [FeedbackType], 
+    [Feedback].[Comments] AS [Comments], 
+    [Feedback].[FeedbackDateTime] AS [FeedbackDateTime]
+    FROM [dbo].[Feedback] AS [Feedback]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="HistoryRecord" EntityType="Self.HistoryRecord" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [HistoryRecord].[EmpID] AS [EmpID], 
@@ -566,6 +590,12 @@ warning 6002: The table/view 'GenesysProject.dbo.vw_TennisTable' does not have a
             <Parameter Name="CancellationSlotID" Mode="In" Type="String" />
             <Parameter Name="EmailID" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Feedbacks" EntityType="GenesysProjectModel.Feedback" />
+          <FunctionImport Name="usp_SetFeedback">
+            <Parameter Name="EmailID" Mode="In" Type="String" />
+            <Parameter Name="FeedbackType" Mode="In" Type="String" />
+            <Parameter Name="Comments" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_GetAllEmployee_Result">
           <Property Type="Int32" Name="EmpID" Nullable="false" />
@@ -613,6 +643,15 @@ warning 6002: The table/view 'GenesysProject.dbo.vw_TennisTable' does not have a
           <Property Type="String" Name="PlayedWith" Nullable="true" />
           <Property Type="String" Name="nthLastWeek" Nullable="true" MaxLength="3" />
         </ComplexType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="EmailID" />
+          </Key>
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FeedbackType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FeedbackDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -790,6 +829,17 @@ warning 6002: The table/view 'GenesysProject.dbo.vw_TennisTable' does not have a
           <FunctionImportMapping FunctionImportName="usp_EmailValidate" FunctionName="GenesysProjectModel.Store.usp_EmailValidate" />
           <FunctionImportMapping FunctionImportName="usp_UpdateSlot" FunctionName="GenesysProjectModel.Store.usp_UpdateSlot" />
           <FunctionImportMapping FunctionImportName="usp_UpdateSlotResult" FunctionName="GenesysProjectModel.Store.usp_UpdateSlot" />
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="GenesysProjectModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="FeedbackDateTime" ColumnName="FeedbackDateTime" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="FeedbackType" ColumnName="FeedbackType" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="usp_SetFeedback" FunctionName="GenesysProjectModel.Store.usp_SetFeedback" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

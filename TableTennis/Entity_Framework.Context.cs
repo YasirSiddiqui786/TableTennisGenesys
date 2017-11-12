@@ -36,6 +36,7 @@ namespace TableTennis
         public virtual DbSet<vw_Employee> vw_Employee { get; set; }
         public virtual DbSet<vw_TennisTable> vw_TennisTable { get; set; }
         public virtual DbSet<vw_Login> vw_Login { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
     
         public virtual ObjectResult<string> usp_BookSlot(string slotID, string emailID)
         {
@@ -250,6 +251,23 @@ namespace TableTennis
                 new ObjectParameter("EmailID", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("usp_UpdateSlotResult", bookingSlotIDParameter, cancellationSlotIDParameter, emailIDParameter);
+        }
+    
+        public virtual int usp_SetFeedback(string emailID, string feedbackType, string comments)
+        {
+            var emailIDParameter = emailID != null ?
+                new ObjectParameter("EmailID", emailID) :
+                new ObjectParameter("EmailID", typeof(string));
+    
+            var feedbackTypeParameter = feedbackType != null ?
+                new ObjectParameter("FeedbackType", feedbackType) :
+                new ObjectParameter("FeedbackType", typeof(string));
+    
+            var commentsParameter = comments != null ?
+                new ObjectParameter("Comments", comments) :
+                new ObjectParameter("Comments", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_SetFeedback", emailIDParameter, feedbackTypeParameter, commentsParameter);
         }
     }
 }

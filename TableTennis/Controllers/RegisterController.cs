@@ -92,7 +92,7 @@ namespace TableTennis.Controllers
 
             SendEmail send = new SendEmail();
             System.Web.HttpContext.Current.Session["OTPTimeStamp"] = DateTime.Now;
-            int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "Registration OTP", "Hi, The OTP for registration is : " + System.Web.HttpContext.Current.Session["GeneratedOTP"]);
+            int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "Registration OTP", "Hi " + System.Web.HttpContext.Current.Session["UserName"] + ",<br><br> The OTP for registration is : " + System.Web.HttpContext.Current.Session["GeneratedOTP"]+"<br><br>Regards<br>RYM Team");
 
         }
 

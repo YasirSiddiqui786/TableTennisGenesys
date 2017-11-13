@@ -15,17 +15,14 @@ namespace TableTennis.Controllers
         GenesysProjectEntities entities = new GenesysProjectEntities();
 
         [HttpPost, Route("api/Bookslot/feedback")]
-        public HttpResponseMessage Feedback(string feedbackType, string comments)
+        public HttpResponseMessage Feedback(string[] feedbackType)
         {
-            //Converting slots int array to comma separated string slotList
-
-
-            //Booking list of slots at once
-            var entity = entities.usp_SetFeedback(System.Web.HttpContext.Current.Session["UserEmail"].ToString(), feedbackType,comments);
+            
+            var entity = entities.usp_SetFeedback(System.Web.HttpContext.Current.Session["UserEmail"].ToString(), feedbackType[0], feedbackType[1]);
             if (entity != null)
             {
                 SendEmail send = new SendEmail();
-                int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "Feedback Recorded", "Hi " + System.Web.HttpContext.Current.Session["UserName"] + ", We appreciate for your valuable feedback");
+                int x = send._SendEmail("no-reply@qfun.com", System.Web.HttpContext.Current.Session["UserEmail"].ToString(), "Feedback Recorded", "Hi " + System.Web.HttpContext.Current.Session["UserName"] + ", We appreciate your valuable feedback.<br><br>Regards<br>RYM Team");
                 return Request.CreateResponse(HttpStatusCode.Created, entity);
             }
             else

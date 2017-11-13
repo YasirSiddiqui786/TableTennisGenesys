@@ -49,6 +49,7 @@
                                             </dl>
 
                                             <div class="container">
+                                                <div class="loadingIcon"><span class="fa fa-spinner fa-spin"></span></div>
                                                 <div id="slotboxContainerNewBook" class="btn-group" data-toggle="buttons">
                                                 </div>
                                             </div>
@@ -111,6 +112,7 @@
                                             </dl>
 
                                             <div class="container">
+                                                <div class="loadingIcon"><span class="fa fa-spinner fa-spin"></span></div>
                                                 <div id="slotboxContainerUpdate" class="btn-group" data-toggle="buttons">
                                                 </div>
                                             </div>
@@ -131,6 +133,7 @@
                         </div>
 
                         <div id="history" class="tab-pane fade">
+                            <div class="loadingIcon"><span class="fa fa-spinner fa-spin"></span></div>
                             <div class="table-responsive">
                                 <table id="historyTable" class="display table table-responsive nowrap" style="width:100%">
                                 </table>
@@ -156,7 +159,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button onclick="storeSessionTab()"" class="btn btn-success" data-dismiss="modal">
+                            <button id="btnClose" onclick="storeSessionTab()"" class="btn btn-success" data-dismiss="modal">
                                 Close
                             </button>
                         </div>
@@ -172,11 +175,12 @@
          <script type="text/javascript">
              var weeklyData = JSON.parse(<%= "'" + weeklyData + "'"%>);
              var currentDateData = JSON.parse(<%= "'" + currentDateData + "'"%>); 
+             var dateNow = JSON.parse(<%= "'" + dateNow + "'"%>); 
              var bookedDateData = (<%= "'" + bookedDateData + "'"%>); 
              var bookingHistoryData = JSON.parse(<%= "'" + bookingHistoryData + "'"%>); 
          </script>
         
-        
+        <script src="../Scripts/ObjectStore.js"></script>
         <script src="../Scripts/BookSlot.js"></script>
     </body>
     </html>

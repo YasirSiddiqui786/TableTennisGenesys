@@ -1,12 +1,14 @@
 ﻿var weeklySortedData = {};
 var sortedHistoryData = [];
+var request, db;
+dateNow = getDateForDateNumber(dateNow);
 
 $(document).ready(function () {
 
     $(".caption").show();
     $("#forgotPswrd").show();
     $("#Logout").show();
-
+    $(".feedBackBox").css("display", "inline-block");
     setUserName();
 
     // Date picker functions for NewBook
@@ -18,12 +20,15 @@ $(document).ready(function () {
         minDate: moment().millisecond(0).second(0).minute(0).hour(0),
         maxDate: moment().add(6, 'days')
     });
+
     // Render SlotBox on date selection from NewBook tab's calendar
     $('#datetimepickerNewBook').on("dp.change", function (e) {
         var selectedDate = newBooktxtbox.val().toString();
-        var selectedDateObj = weeklySortedData[selectedDate];
+        //IDBC: var selectedDateObj = weeklySortedData[selectedDate];
+        //var selectedDateObj = ObjStore.getRecordBySlotDate(selectedDate);
         sessionStorage.setItem('selectedSlot', "");
-        renderSlotBox(selectedDateObj, '#slotboxContainerNewBook', 'nbSlot');
+        //renderSlotBox(selectedDateObj, '#slotboxContainerNewBook', 'nbSlot');
+        ObjStore.getRecordBySlotDate(selectedDate, renderSlotBox, ['#slotboxContainerNewBook', 'nbSlot']);
     });
 
     // Date picker functions for Uopdate Booking
@@ -36,58 +41,100 @@ $(document).ready(function () {
         maxDate: moment().add(7, 'days')
     });
     // Render SlotBox on date selection from Update Booking tab's calendar
+
     $('#datetimepickerUpdate').on("dp.change", function (e) {
         if (e.date._i.toString() !== $("#selectDateUpdate").val().toString()) {
             sessionStorage.setItem('selectedSlot', "");
-            renderSlotBox(weeklySortedData[$("#selectDateUpdate").val().toString()], '#slotboxContainerUpdate', 'ubSlot');
+            //IDBC: renderSlotBox(weeklySortedData[$("#selectDateUpdate").val().toString()], '#slotboxContainerUpdate', 'ubSlot');
+            ObjStore.getRecordBySlotDate(($("#selectDateUpdate").val().toString()), renderSlotBox, ['#slotboxContainerUpdate', 'ubSlot']);
         }
     });
+
+
+    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+
+    if (!window.indexedDB) {
+        console.log("Your Browser does not support IndexedDB");
+    }
+    else {
+        ObjStore.openDB();
+    }
+
+
+
+
 
     // Render slotbox
     //renderSlotBox(currentDateData, '#slotboxContainerNewBook', 'nbSlot');
     // Render updateOptions
-    
+
+    //sortWeeklyData(weeklyData);
+
+    //rederUpdateOptionBox();
+
+    //renderHistoryTable();
+
+    //refreshTab();
+
+});
+
+function functionCallee() {
+
     sortWeeklyData(weeklyData);
 
     rederUpdateOptionBox();
 
     renderHistoryTable();
 
-    refreshTab();
+    setTimeout(refreshTab, 2000);
 
-});
+    //refreshTab();
+};
 
 function clearSlot() {
     var activeTabID = $("div.active")[0].id,
         selectedDate = $("#" + activeTabID + " input[type=text]").val();
 
     if (activeTabID === "newBooking") {
-        renderSlotBox(weeklySortedData[selectedDate], '#slotboxContainerNewBook', 'nbSlot');
+        //IDBC: renderSlotBox(weeklySortedData[selectedDate], '#slotboxContainerNewBook', 'nbSlot');
+        ObjStore.getRecordBySlotDate(selectedDate, renderSlotBox, ['#slotboxContainerNewBook', 'nbSlot']);
     }
     else if (activeTabID === "updateBooking") {
-        renderSlotBox(currentDateData, '#slotboxContainerNewBook', 'nbSlot');
-        renderSlotBox(weeklySortedData[selectedDate], '#slotboxContainerUpdate', 'ubSlot');
+        //IDBC: renderSlotBox(currentDateData, '#slotboxContainerNewBook', 'nbSlot');
+        //IDBC: renderSlotBox(weeklySortedData[selectedDate], '#slotboxContainerUpdate', 'ubSlot');
+        ObjStore.getRecordBySlotDate(dateNow, renderSlotBox, ['#slotboxContainerNewBook', 'nbSlot']);
+        ObjStore.getRecordBySlotDate(selectedDate, renderSlotBox, ['#slotboxContainerUpdate', 'ubSlot']);
     }
     sessionStorage.setItem('selectedSlot', "{}");
 
 }
 
 function refreshTab() {
+
+    //console.log("inside setTimeOut");
+
     var currentTabID, currentDate;
     var activeTabID = $("div.active")[0].id,
         selectedDate = $("#" + activeTabID + " input[type=text]").val();
     currentTabID = sessionStorage.currentTabID ? JSON.parse(sessionStorage.currentTabID) : activeTabID;
     currentDate = sessionStorage.currentDate ? JSON.parse(sessionStorage.currentDate) : selectedDate;
 
+
     if (currentTabID && currentDate) {
 
         if (currentTabID === "newBooking") {
-            renderSlotBox(weeklySortedData[currentDate], '#slotboxContainerNewBook', 'nbSlot');
-            renderSlotBox(currentDateData, '#slotboxContainerUpdate', 'ubSlot');
+            //IDBC: renderSlotBox(weeklySortedData[currentDate], '#slotboxContainerNewBook', 'nbSlot');
+            //IDBC: renderSlotBox(currentDateData, '#slotboxContainerUpdate', 'ubSlot');
+
+            ObjStore.getRecordBySlotDate(currentDate, renderSlotBox, ['#slotboxContainerNewBook', 'nbSlot']);
+            ObjStore.getRecordBySlotDate(dateNow, renderSlotBox, ['#slotboxContainerUpdate', 'ubSlot']);
         }
         else if (currentTabID === "updateBooking") {
-            renderSlotBox(currentDateData, '#slotboxContainerNewBook', 'nbSlot');
-            renderSlotBox(weeklySortedData[currentDate], '#slotboxContainerUpdate', 'ubSlot');
+            //IDBC: renderSlotBox(currentDateData, '#slotboxContainerNewBook', 'nbSlot');
+            //IDBC: renderSlotBox(weeklySortedData[currentDate], '#slotboxContainerUpdate', 'ubSlot');
+            ObjStore.getRecordBySlotDate(dateNow, renderSlotBox, ['#slotboxContainerNewBook', 'nbSlot']);
+            ObjStore.getRecordBySlotDate(currentDate, renderSlotBox, ['#slotboxContainerUpdate', 'ubSlot']);
         }
 
         $('.nav-tabs a[href="#' + currentTabID + '"]').tab('show');
@@ -98,15 +145,19 @@ function refreshTab() {
     }
 }
 
+
 // Function to render SlotBox with given slot parameters and containerID
 function renderSlotBox(slotObj, containerID, tabID) {
 
+    //console.log(slotObj);
+    //console.log(slotObj.length);
+    //console.log(containerID);
+    //console.log(tabID);
     var counter = 0;
     var container = $(containerID);
     var slotList = "";
     var displayType, slotboxID, slotTime, slotStatus, slotCount, isDisabled, slotCategory, slotPlayers, isChecked;
     var slotCase = 0;
-    //var activeTabID = $("div.active")[0].id;
 
     for (counter = 0; counter < slotObj.length; counter++) {
         slotboxID = slotObj[counter].SlotID;
@@ -176,6 +227,8 @@ function renderSlotBox(slotObj, containerID, tabID) {
         slotList += `<label class="btn slotbox ${displayType}" title ="${slotPlayers}" ${isDisabled} ><input id="${tabID}_${slotboxID}" type="checkbox" ${isChecked} onchange="selectSlot(this)" data-category=${slotCategory} /><span class="slotTime"></span>${slotTime}<br /><span class="slotStatus">${slotStatus}</span></label>`;
     }
     container.empty();
+    //console.log("inside render slot:"+ slotList);
+    container.parent().find('.loadingIcon').hide();
     container.append(slotList);
 
     // To store booked slots in session
@@ -240,7 +293,8 @@ function rederUpdateOptionBox() {
             $("#selectDateUpdate").val(dateString);
             if (dateString.toString() !== oldDate.toString()) {
                 sessionStorage.setItem('selectedSlot', "");
-                renderSlotBox(weeklySortedData[dateString], '#slotboxContainerUpdate', 'ubSlot');
+                //IDBC: renderSlotBox(weeklySortedData[dateString], '#slotboxContainerUpdate', 'ubSlot');
+                ObjStore.getRecordBySlotDate(dateString, renderSlotBox, ['#slotboxContainerUpdate', 'ubSlot']);
             }
 
         }
@@ -250,9 +304,25 @@ function rederUpdateOptionBox() {
 function renderHistoryTable() {
 
     var lenMenu = sortHistoryData(bookingHistoryData);
+    setTimeout(ObjStore.getHistoryRecord(lenMenu, drawHistoryTable),2000);
+    //$('#historyTable').dataTable({
+    //    data: sortedHistoryData,
+    //    columns: [
+    //        { title: "Sr. No." },
+    //        { title: "Date" },
+    //        { title: "Time" },
+    //        { title: "Played With" },
+    //        { title: "Last Updated On" }
+    //    ],
+    //    "lengthMenu": [lenMenu, ["Last 1 Week", "Last 2 Weeks", "Last 3 Weeks", "Last 1 Month"]],
+    //    "pageLength": 10
+    //});
+}
 
+function drawHistoryTable(lenMenu, historyData) {
+    $('#historyTable').parent().parent().find('.loadingIcon').hide();
     $('#historyTable').dataTable({
-        data: sortedHistoryData,
+        data: historyData,
         columns: [
             { title: "Sr. No." },
             { title: "Date" },
@@ -263,15 +333,13 @@ function renderHistoryTable() {
         "lengthMenu": [lenMenu, ["Last 1 Week", "Last 2 Weeks", "Last 3 Weeks", "Last 1 Month"]],
         "pageLength": 10
     });
-}
+
+};
 
 function sortWeeklyData(weeklyData) {
     var dateObj = {}, dateID;
     for (var i = 0; i < weeklyData.length; i++) {
         dateID = getDateForDateNumber(weeklyData[i].Date);
-        //dateStr = parseInt(weeklyData[i].Date.replace("/Date(", "").replace(")/", ""), 10);
-        //dateStr = new Date(dateStr);
-        //dateID = `${dateStr.getDate()}-${(parseInt(dateStr.getMonth(), 10) + 1 < 10) ? ('0' + (parseInt(dateStr.getMonth(), 10) + 1)) : (parseInt(dateStr.getMonth(), 10) + 1)}-${dateStr.getFullYear()}`;
         dateObj = {
             IsAvailable: weeklyData[i].IsAvailable,
             SeatsAvailable: weeklyData[i].SeatsAvailable,
@@ -280,32 +348,27 @@ function sortWeeklyData(weeklyData) {
             EmpName: weeklyData[i].EmpName
 
         }
-        if (!weeklySortedData[dateID]) {
-            weeklySortedData[dateID] = [];
-        }
-        //weeklySortedData[dateID][weeklyData[i].SlotID] = dateObj;
-        weeklySortedData[dateID].push(dateObj);
+        //if (!weeklySortedData[dateID]) {
+        //    weeklySortedData[dateID] = [];
+        //}
+        //weeklySortedData[dateID].push(dateObj);
+        ObjStore.addSlotRecord(weeklyData[i].SlotID, dateID, weeklyData[i].EmpName, weeklyData[i].IsAvailable, weeklyData[i].SeatsAvailable, weeklyData[i].Time);
     }
 }
 
 function sortHistoryData(bookingHistoryData) {
-    var dataItem = [], bookingDateID, updatedDateID;
+    var dataItem = [], bookingDateID, updatedDateID, playedWithStr;
     var lw1 = 0, lw2 = 0, lw3 = 0, lw4 = 0;
     for (var i = 0; i < bookingHistoryData.length; i++) {
 
         bookingDateID = getDateForDateNumber(bookingHistoryData[i].Date);
-        //bookingDateStr = parseInt(bookingHistoryData[i].Date.replace("/Date(", "").replace(")/", ""), 10);
-        //bookingDateStr = new Date(bookingDateStr);
-        //bookingDateID = `${bookingDateStr.getDate()}-${(parseInt(bookingDateStr.getMonth(), 10) + 1 < 10) ? ('0' + (parseInt(bookingDateStr.getMonth(), 10) + 1)) : (parseInt(bookingDateStr.getMonth(), 10) + 1)}-${bookingDateStr.getFullYear()}`;
-
         updatedDateID = getDateForDateNumber(bookingHistoryData[i].UpdatedDate);
-        //updatedDateStr = parseInt(bookingHistoryData[i].UpdatedDate.replace("/Date(", "").replace(")/", ""), 10);
-        //updatedDateStr = new Date(updatedDateStr);
-        //updatedDateID = `${updatedDateStr.getDate()}-${(parseInt(updatedDateStr.getMonth(), 10) + 1 < 10) ? ('0' + (parseInt(updatedDateStr.getMonth(), 10) + 1)) : (parseInt(updatedDateStr.getMonth(), 10) + 1)}-${updatedDateStr.getFullYear()}`;
-
+        playedWithStr = bookingHistoryData[i].PlayedWith ? bookingHistoryData[i].PlayedWith : "None";
 
         dataItem = [i + 1, bookingDateID, bookingHistoryData[i].Time.substring(0, 5), bookingHistoryData[i].PlayedWith ? bookingHistoryData[i].PlayedWith : "None", updatedDateID];
         sortedHistoryData.push(dataItem);
+
+        ObjStore.addHistoryRecord(i + 1, bookingDateID, playedWithStr, bookingHistoryData[i].TableID, bookingHistoryData[i].Time.substring(0, 5), updatedDateID, bookingHistoryData[i].nthLastWeek);
 
         switch (bookingHistoryData[i].nthLastWeek) {
             case 'LW1':
@@ -421,7 +484,6 @@ function validateSlot(ele) {
 function getDateForDateNumber(dateNumberStr) {
     var dateID, dateStr;
     dateStr = parseInt(dateNumberStr.replace("/Date(", "").replace(")/", ""), 10);
-    //dateStr = Date(dateStr);
     dateStr = new Date(dateStr);
     dateID = `${(parseInt(dateStr.getDate(), 10) < 10) ? ('0' + (parseInt(dateStr.getDate(), 10))) : (parseInt(dateStr.getDate(), 10))}-${(parseInt(dateStr.getMonth(), 10) + 1 < 10) ? ('0' + (parseInt(dateStr.getMonth(), 10) + 1)) : (parseInt(dateStr.getMonth(), 10) + 1)}-${dateStr.getFullYear()}`;
     return dateID;
@@ -457,6 +519,7 @@ function bookSlot() {
                 if (response[0] === "Booked") {
                     $("#modal-title")[0].innerHTML = "Booking Successful";
                     $("#modal-Desc")[0].innerHTML = "Your slot(s) are booked successfuly";
+                    $("#btnClose").show();
                     $('#statusModal').modal('show');
                 }
             },
@@ -464,6 +527,7 @@ function bookSlot() {
             error: function (jqXHR) {
                 $('#modal-title').text(jqXHR.statusText);
                 $('#modal-Desc').text(jqXHR.responseJSON.message + " " + jqXHR.responseJSON.exceptionMessage);
+                $("#btnClose").show();
                 $('#statusModal').modal('show');
             }
         });
@@ -509,6 +573,7 @@ function updateSlotBooking() {
             if (response.indexOf("Cancelled") === 0 || response.indexOf("Booked") === 0) {
                 $("#modal-title")[0].innerHTML = "Changes Saved";
                 $("#modal-Desc")[0].innerHTML = "Bookings updated successfuly";
+                $("#btnClose").show();
                 $('#statusModal').modal('show');
             }
         },
@@ -517,20 +582,77 @@ function updateSlotBooking() {
             $('#modal-title').text(jqXHR.statusText);
             //$('#modal-Desc').text(jqXHR.responseJSON.message + " " + jqXHR.responseJSON.exceptionMessage);
             $('#modal-Desc').text("Test Message ");
+            $("#btnClose").show();
             $('#statusModal').modal('show');
         }
     });
 
 }
 
+function openFeedBackModal() {
+    $("#modal-title")[0].innerHTML = "GenPlay Feedback";
+    $("#modal-Desc")[0].innerHTML = "<div class='feedback'>How do you feel about GenPlay?<span class='required'> *</span>" +
+                                    "<div id='reactionBox'>" +
+                                        "<input type='radio' class='radioBtnWrapper' name='reaction' onclick='updateRadioButtonText()' id='reactHappy' value='Happy'>" +
+                                        "<label for='reactHappy' class='reactLabel'>Happy<span class='fa fa-smile-o'></span></label>" +
+                                        "<input type='radio' class='radioBtnWrapper' name='reaction' onclick='updateRadioButtonText()' id='reactConfused' value='Confused'>" +
+                                        "<label for='reactConfused' class='reactLabel'>Confused<span class='fa fa-meh-o'></span></label>" +
+                                        "<input type='radio' class='radioBtnWrapper' name='reaction' onclick='updateRadioButtonText()' id='reactSad' value='Sad'>" +
+                                        "<label for='reactSad' class='reactLabel'>Sad<span class='fa fa-frown-o'></span></label>" +
+                                    "</div></div>" +
+                                    "<div class='feedback'>Comments" +
+                                    "<textarea id='reactComment' type='text' class='form-control'></textarea></div>" +
+                                    "<div class='feedback'><input id='btnSendFeedback' class='btn btn-success btnLong pull-right' onclick='sendFeedback()' type='button' value='Send' disabled='disable'></div>";
+    $("#btnClose").hide();
+    $('#statusModal').modal('show');
+};
+
+function updateRadioButtonText() {
+    var element = $("input[type='radio']:checked")[0].id;
+    $("label.reactLabel").css("font-weight", "normal");
+    $("label[for=" + element + "]").css("font-weight", "bold");
+    $("#btnSendFeedback")[0].disabled = false;
+}
+
+function sendFeedback() {
+    var data = [];
+    var element = $("input[type='radio']:checked")[0].id;
+    data.push($("input[type='radio']:checked")[0].value);
+    data.push($("#reactComment")[0].value);
+    $('#statusModal').modal('hide');
+    $.ajax({
+        // Post Feedback
+        url: '/api/Bookslot/feedback',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        type: JSON,
+        success: function (response) {
+                $('#statusModal').modal('fade');
+        },
+        // Display errors if any in the Bootstrap alert <div>
+        error: function (jqXHR) {
+            $('#modal-title').text(jqXHR.statusText);
+            $('#modal-Desc').text(jqXHR.responseJSON.message + " " + jqXHR.responseJSON.exceptionMessage);
+            $("#btnClose").show();
+            $('#statusModal').modal('show');
+        }
+    });
+
+}
+
+
 //function HandleBackFunctionality() {
 //    if (window.event.clientX < 40 && window.event.clientY < 0) {
 //        alert("Browser back button is clicked...");
 //    }
 //}
-window.onbeforeunload = function () {
-    //blah blah blah
-    console.log("Browser back button is clicked...");
+//window.onbeforeunload = function () {
+//    //blah blah blah
+//    console.log("Browser back button is clicked...");
+//    window.history.forward();
 
-}
+//}
+//function preventBack() { window.history.forward(); }
 
+//window.onbeforeunload = function () { setTimeout("preventBack()", 0); };

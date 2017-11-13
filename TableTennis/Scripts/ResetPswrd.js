@@ -31,7 +31,6 @@
     $('#btnSendOTP').click(function () {
 
         $('#divError').hide();
-
         var userEmail = $('#txtResetUsername').val();
         var validEmail = userEmail ? Validate.validateEmail(userEmail) : 0;
         if (validEmail === 1) {

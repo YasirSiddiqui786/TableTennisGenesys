@@ -33,7 +33,7 @@ namespace TableTennis.Controllers
             }
             else
             {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Existing EmailID");
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Email ID already exist");
             }
         }
 

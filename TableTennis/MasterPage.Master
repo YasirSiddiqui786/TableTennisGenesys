@@ -9,13 +9,14 @@
     <title></title>
 
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    
-<%--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />--%>
     <link href="Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" />
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link href="Content/Common.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="Content/jquery.dataTables.min.css" rel="stylesheet" />
+    
+<%--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" />
+    --%>
 
     <asp:ContentPlaceHolder id="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -58,7 +59,15 @@
         <asp:ContentPlaceHolder id="ContentPlaceHolder4" runat="server"></asp:ContentPlaceHolder>
     </div>
 
-    <div class="page-footer page-row"><div class="footerText">Copyright © 2017 Genesys. All rights reserved.</div></div>
+    <div class="page-footer page-row">
+        <div class="feedBackBox" title="Wanna share what you think?" onclick="openFeedBackModal()">
+            <%--<span class="fa fa-smile-o"></span>
+            <span class="fa fa-meh-o"></span>
+            <span class="fa fa-frown-o"></span>--%>
+            <span class="fa fa-comments"></span>
+        </div>
+        <div class="footerText">Copyright © 2017 Genesys. All rights reserved.</div>
+    </div>
 
     <script type="text/javascript">    
     
@@ -69,7 +78,6 @@
             inSession =inSession.toString().split(" ")[0];
             userName.text(inSession) ;
         }
-        
     </script>
 
 </body>

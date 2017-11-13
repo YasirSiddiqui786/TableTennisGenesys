@@ -13,7 +13,7 @@
     $("#registerTable input[type=text]").change(function () {
         var userEmail = $('#txtEmail').val();
         var validateBtn = $('#btnvalidateEmail span');
-        if (userEmail !== "" && !(validateBtn.hasClass("fa-times-circle") || validateBtn.hasClass("fa-times-circle"))) {
+        if (userEmail !== "" && !(validateBtn.hasClass("fa-times-circle") || validateBtn.hasClass("fa-check-circle"))) {
             $('#btnvalidateEmail').click();
         }
     })

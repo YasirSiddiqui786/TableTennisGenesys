@@ -20,7 +20,7 @@ public partial class Pages_Login : System.Web.UI.Page
     public List<usp_GetAvailability_Result> currentList = new List<usp_GetAvailability_Result>();
     public List<DateTime> bookedDateList = new List<DateTime>();
     public List<usp_GetBookedHistoryList_Result> bookingHistory = new List<usp_GetBookedHistoryList_Result>();
-    public string weeklyData, currentDateData, bookedDateData, bookingHistoryData;
+    public string weeklyData, currentDateData, dateNow, bookedDateData, bookingHistoryData;
 
 
 
@@ -79,6 +79,7 @@ public partial class Pages_Login : System.Web.UI.Page
         JavaScriptSerializer js = new JavaScriptSerializer();
         weeklyData = js.Serialize(weeklyList);
         currentDateData = js.Serialize(currentList);
+        dateNow = js.Serialize(DateTime.Now.Date);
         bookedDateData = js.Serialize(bookedDateList);
         bookingHistoryData = js.Serialize(bookingHistory);
     }

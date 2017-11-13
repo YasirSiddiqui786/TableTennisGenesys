@@ -97,7 +97,7 @@
                                 <div class="modal-footer">
                                     <button onclick="window.location.href = 'Login.aspx'" class="btn btn-success"
                                             data-dismiss="modal">
-                                        SignIn
+                                        Sign In
                                     </button>
                                 </div>
                             </div>
